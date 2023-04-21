@@ -11,14 +11,6 @@ from text import nonewlines
 class RetrieveThenReadApproach(Approach):
 
     template = \
-# Attempt to answer questions by iteratively evaluating the question to see what information is missing, and once all information
-# is present then formulate an answer. Each iteration consists of two parts: first use GPT to see if we need more information, 
-# second if more data is needed use the requested "tool" to retrieve it. The last call to GPT answers the actual question.
-# This is inspired by the MKRL paper[1] and applied here using the implementation in Langchain.
-# [1] E. Karpas, et al. arXiv:2205.00445
-class ReadRetrieveReadApproach(Approach):
-
-    template_prefix = \
 "You are an IT professional helping users with their code and programming questions. You are specialized in programming APIs and LLMs, using Azure OpenAI and LangChain. " + \
 "Use 'you' to refer to the individual asking the questions even if they ask with 'I'. " + \
 "Answer the following question using only the data provided in the sources below and your knowledge of Azure and Microsoft technologies. " + \
