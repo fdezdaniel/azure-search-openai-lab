@@ -4,31 +4,41 @@ from azure.search.documents import SearchClient
 from azure.search.documents.models import QueryType
 from text import nonewlines
 
+
 # Simple retrieve-then-read implementation, using the Cognitive Search and OpenAI APIs directly. It first retrieves
 # top documents from search, then constructs a prompt with them, and then uses OpenAI to generate an completion 
 # (answer) with that prompt.
 class RetrieveThenReadApproach(Approach):
 
     template = \
-"You are an intelligent assistant helping Contoso Inc employees with their healthcare plan questions and employee handbook questions. " + \
+# Attempt to answer questions by iteratively evaluating the question to see what information is missing, and once all information
+# is present then formulate an answer. Each iteration consists of two parts: first use GPT to see if we need more information, 
+# second if more data is needed use the requested "tool" to retrieve it. The last call to GPT answers the actual question.
+# This is inspired by the MKRL paper[1] and applied here using the implementation in Langchain.
+# [1] E. Karpas, et al. arXiv:2205.00445
+class ReadRetrieveReadApproach(Approach):
+
+    template_prefix = \
+"You are an IT professional helping users with their code and programming questions. You are specialized in programming APIs and LLMs, using Azure OpenAI and LangChain. " + \
 "Use 'you' to refer to the individual asking the questions even if they ask with 'I'. " + \
-"Answer the following question using only the data provided in the sources below. " + \
+"Answer the following question using only the data provided in the sources below and your knowledge of Azure and Microsoft technologies. " + \
 "For tabular information return it as an html table. Do not return markdown format. "  + \
 "Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. " + \
 "If you cannot answer using the sources below, say you don't know. " + \
 """
 
 ###
-Question: 'What is the deductible for the employee plan for a visit to Overlake in Bellevue?'
+Question: 'Write code in Python that creates chatbot using LangChain and Azure OpenAI'
 
 Sources:
-info1.txt: deductibles depend on whether you are in-network or out-of-network. In-network deductibles are $500 for employee and $1000 for family. Out-of-network deductibles are $1000 for employee and $2000 for family.
-info2.pdf: Overlake is in-network for the employee plan.
-info3.pdf: Overlake is the name of the area that includes a park and ride near Bellevue.
-info4.pdf: In-network institutions include Overlake, Swedish and others in the region
+info1.txt: How to create ChatGPT Clone. This chain replicates ChatGPT by combining (1)a specific prompt,and (2) the concept of memory.
+
+info2.pdf: Example of how to load the OpenAI Embedding class with environment variables set to indicate to use Azure endpoints
+info3.pdf: This notebook goes over how to use Langchain with Azure OpenAI.
+info4.pdf: This notebook goes over how to connect to an Azure hosted OpenAI endpoint
 
 Answer:
-In-network deductibles are $500 for employee and $1000 for family [info1.txt] and Overlake is in-network for the employee plan [info2.pdf][info4.pdf].
+This code example creates a ChatGPT Clone, replicates ChatGPT by combining a specific prompt, and memory [info1.txt] It connects to an Azure hosted OpenAI endpoint [info4.pdf][info2.pdf], creating a LangChain chain with an Azure OpenAI agent. [code example] 
 
 ###
 Question: '{q}'?

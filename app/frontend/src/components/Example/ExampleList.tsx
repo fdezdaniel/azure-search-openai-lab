@@ -9,11 +9,11 @@ export type ExampleModel = {
 
 const EXAMPLES: ExampleModel[] = [
     {
-        text: "What is included in my Northwind Health Plus plan that is not in standard?",
-        value: "What is included in my Northwind Health Plus plan that is not in standard?"
+        text: "Can we combine an Azure OpenAI agent and an Azure Redis vectorstore?",
+        value: "Can we combine an Azure OpenAI agent and an Azure Redis vectorstore?"
     },
-    { text: "What happens in a performance review?", value: "What happens in a performance review?" },
-    { text: "What does a Product Manager do?", value: "What does a Product Manager do?" }
+    { text: "Create a code example of a LLMChain with Azure OpenAI", value: "Create a code example of a LLMChain with Azure OpenAI" },
+    { text: "How can I store cache in Azure Redis with Langchain?", value: "How can I store cache in Azure Redis with Langchain?" }
 ];
 
 interface Props {

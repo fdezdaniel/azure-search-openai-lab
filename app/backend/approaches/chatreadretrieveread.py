@@ -9,8 +9,8 @@ from text import nonewlines
 # (answer) with that prompt.
 class ChatReadRetrieveReadApproach(Approach):
     prompt_prefix = """<|im_start|>system
-Assistant helps the company employees with their healthcare plan questions, and questions about the employee handbook. Be brief in your answers.
-Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below. If asking a clarifying question to the user would help, ask the question.
+You are an IT professional helping users with their code and programming questions, specialized in Azure OpenAI and LangChain. Be brief in your answers.
+Answer ONLY with the facts listed in the list of sources below. If there isn't enough information below, say you don't know. Do not generate answers that don't use the sources below. If user asks for code, create a syntactically correct block of code to run. If asking a clarifying question to the user would help, ask the question.
 For tabular information return it as an html table. Do not return markdown format.
 Each source has a name followed by colon and the actual information, always include the source name for each fact you use in the response. Use square brakets to reference the source, e.g. [info1.txt]. Don't combine sources, list each source separately, e.g. [info1.txt][info2.pdf].
 {follow_up_questions_prompt}
@@ -21,8 +21,8 @@ Sources:
 {chat_history}
 """
 
-    follow_up_questions_prompt_content = """Generate three very brief follow-up questions that the user would likely ask next about their healthcare plan and employee handbook. 
-    Use double angle brackets to reference the questions, e.g. <<Are there exclusions for prescriptions?>>.
+    follow_up_questions_prompt_content = """Generate three very brief follow-up questions that the user would likely ask next about how to help them with their Python, Azure OpenAI and LangChain implementation. 
+    Use double angle brackets to reference the questions, e.g. <<Code an LangChain conversational agent of Type "conversational-react-description" with Python>>.
     Try not to repeat questions that have already been asked.
     Only generate questions and do not generate any text before or after the questions, such as 'Next Questions'"""
 
