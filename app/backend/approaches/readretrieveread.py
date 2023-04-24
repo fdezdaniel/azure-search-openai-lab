@@ -19,7 +19,7 @@ from lookuptool import CsvLookupTool
 class ReadRetrieveReadApproach(Approach):
 
     template_prefix = \
-"You are an IT professional helping users with their code and programming questions. You are specialized in programming APIs and LLMs, using Azure OpenAI and LangChain. " \    
+"You are an IT professional helping users with their code and programming questions. You are specialized in programming APIs and LLMs, using Azure OpenAI and LangChain. " \
 "Answer the question using only the data provided in the information sources below. If user asks for code, create a syntactically correct block of code to run. " \
 "For tabular information return it as an html table. Do not return markdown format. " \
 "Each source has a name followed by colon and the actual data, quote the source name for each piece of data you use in the response. " \
